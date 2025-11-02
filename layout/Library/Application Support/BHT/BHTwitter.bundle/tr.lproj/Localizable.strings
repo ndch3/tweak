@@ -381,3 +381,5 @@
 "CUSTOM_TAB_BAR_PROFILE" = "Profil";
 "HIDE_BLUE_VERIFIED_OPTION_TITLE" = "Blue onay rozetlerini gizle";
 "HIDE_BLUE_VERIFIED_OPTION_DETAIL_TITLE" = "Tweet'lerdeki ücretli onay rozetini gizle. Bu, marka veya devlet hesaplarını kapsamaz.";
+
+"COOL_KIDS_SECTION_HEADER_TITLE" = "Havalı çocuklar";

@@ -97,6 +97,7 @@ static UIFont *TwitterChirpFont(TwitterFontStyle style) {
 @property (nonatomic, strong) UITableView *tableView;
 @property (nonatomic, strong) NSArray *sections;
 @property (nonatomic, strong) NSArray *developerCells;
+@property (nonatomic, strong) NSArray *coolKidsCells;
 @property (nonatomic, strong) NSArray *specialThanksCells;
 @property (nonatomic, strong) NSArray *officialPageCells;
 @end
@@ -500,11 +501,16 @@ static UIFont *TwitterChirpFont(TwitterFontStyle style) {
         return [self headerViewWithTitle:[[BHTBundle sharedBundle] localizedStringForKey:@"DEVELOPER_SECTION_HEADER_TITLE"]];
     }
     else if (section == 2) {
+    // Cool Kids section header
+    return [self headerViewWithTitle:
+        [[BHTBundle sharedBundle] localizedStringForKey:@"COOL_KIDS_SECTION_HEADER_TITLE"]];
+    }
+    else if (section == 3) {
     // Special Thanks section header
     return [self headerViewWithTitle:
         [[BHTBundle sharedBundle] localizedStringForKey:@"SPECIAL_THANKS_SECTION_HEADER_TITLE"]];
     }
-    else if (section == 3) {
+    else if (section == 4) {
     // Official Page section header
     return [self headerViewWithTitle:
         [[BHTBundle sharedBundle] localizedStringForKey:@"FOLLOW_OFFICIAL_PAGE_SECTION_HEADER_TITLE"]];
@@ -609,13 +615,18 @@ static UIFont *TwitterChirpFont(TwitterFontStyle style) {
 - (void)setupDeveloperCells {
     self.developerCells = @[
         @{ @"title": @"aridan", @"username": @"actuallyaridan", @"avatarURL": @"https://unavatar.io/x/actuallyaridan", @"userID": @"1351218086649720837" },
-        @{ @"title": @"thea", @"username": @"theameoww", @"avatarURL": @"https://unavatar.io/github/nyathea", @"userID": @"1479626241175175173" },
-        @{ @"title": @"timi2506", @"username": @"timi2506", @"avatarURL": @"https://unavatar.io/github/timi2506", @"userID": @"1684856685486063616" }
+        @{ @"title": @"timi2506", @"username": @"timi2506", @"avatarURL": @"https://unavatar.io/github/timi2506", @"userID": @"1684856685486063616" },
+        @{ @"title": @"thea", @"username": @"theameoww", @"avatarURL": @"https://unavatar.io/github/nyathea", @"userID": @"1479626241175175173" }
+    ];
+    
+    self.coolKidsCells = @[
+        @{ @"title": @"Eevee", @"username": @"whoeevee1", @"avatarURL": @"https://unavatar.io/github/whoeevee", @"userID": @"1547956497342115844" },
+        @{ @"title": @"zxcvbn", @"username": @"zxxvbn0", @"avatarURL": @"https://unavatar.io/x/zxxvbn0", @"userID": @"1678444396717514760" }
     ];
 
     self.specialThanksCells = @[
         @{ @"title": @"BandarHelal", @"username": @"BandarHL", @"avatarURL": @"https://unavatar.io/x/BandarHL", @"userID": @"827842200708853762" },
-        @{ @"title": @"YouGottaBillieve", @"username": @"ugottabillieve", @"avatarURL": @"https://unavatar.io/x/ugottabillieve", @"userID": @"1616194182187732992" } 
+        @{ @"title": @"YouGottaBillieve", @"username": @"ugottabillieve", @"avatarURL": @"https://unavatar.io/x/ugottabillieve", @"userID": @"1616194182187732992" }
     ];
 
     self.officialPageCells = @[
@@ -709,7 +720,7 @@ static UIFont *TwitterChirpFont(TwitterFontStyle style) {
 #pragma mark - UITableViewDataSource
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 4;
+    return 5;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
@@ -718,8 +729,10 @@ static UIFont *TwitterChirpFont(TwitterFontStyle style) {
     } else if (section == 1) {
         return self.developerCells.count;
     } else if (section == 2) {
-        return self.specialThanksCells.count;
+        return self.coolKidsCells.count;
     } else if (section == 3) {
+        return self.specialThanksCells.count;
+    } else if (section == 4) {
         return self.officialPageCells.count;
     }
     return 0;
@@ -743,9 +756,14 @@ static UIFont *TwitterChirpFont(TwitterFontStyle style) {
     else if (indexPath.section == 2) {
         return [self developerCellForTableView:tableView
                                    atIndexPath:indexPath
-                                     fromArray:self.specialThanksCells];
+                                     fromArray:self.coolKidsCells];
     }
     else if (indexPath.section == 3) {
+        return [self developerCellForTableView:tableView
+                                   atIndexPath:indexPath
+                                     fromArray:self.specialThanksCells];
+    }
+    else if (indexPath.section == 4) {
         return [self developerCellForTableView:tableView
                                    atIndexPath:indexPath
                                      fromArray:self.officialPageCells];
@@ -864,10 +882,14 @@ static UIFont *TwitterChirpFont(TwitterFontStyle style) {
         [self openTwitterProfileWithUserID:developer[@"userID"]];
     }
     else if (indexPath.section == 2) {
-        NSDictionary *developer = self.specialThanksCells[indexPath.row];
+        NSDictionary *developer = self.coolKidsCells[indexPath.row];
         [self openTwitterProfileWithUserID:developer[@"userID"]];
     }
     else if (indexPath.section == 3) {
+        NSDictionary *developer = self.specialThanksCells[indexPath.row];
+        [self openTwitterProfileWithUserID:developer[@"userID"]];
+    }
+    else if (indexPath.section == 4) {
         NSDictionary *developer = self.officialPageCells[indexPath.row];
         [self openTwitterProfileWithUserID:developer[@"userID"]];
     }
