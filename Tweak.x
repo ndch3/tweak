@@ -691,11 +691,11 @@ static inline NSString *BHTIconNameForKey(NSString *key) {
         if (@available(iOS 14.0, *)) {
             [copyButton setShowsMenuAsPrimaryAction:true];
 
-            UIAction *bio = [UIAction actionWithTitle:[[BHTBundle sharedBundle] localizedStringForKey:@"COPY_PROFILE_INFO_MENU_OPTION_1"]
-                                                image:BHTVectorIcon(BHTIconNameForKey(@"bio"), 16.0)
-                                           identifier:nil
-                                              handler:^(__kindof UIAction * _Nonnull action) {
-                if (self.viewModel.bio != nil) UIPasteboard.generalPasteboard.string = self.viewModel.bio;
+            UIAction *fullname = [UIAction actionWithTitle:[[BHTBundle sharedBundle] localizedStringForKey:@"COPY_PROFILE_INFO_MENU_OPTION_3"]
+                                                     image:BHTVectorIcon(BHTIconNameForKey(@"fullname"), 16.0)
+                                                identifier:nil
+                                                   handler:^(__kindof UIAction * _Nonnull action) {
+                if (self.viewModel.fullName != nil) UIPasteboard.generalPasteboard.string = self.viewModel.fullName;
             }];
 
             UIAction *username = [UIAction actionWithTitle:[[BHTBundle sharedBundle] localizedStringForKey:@"COPY_PROFILE_INFO_MENU_OPTION_2"]
@@ -705,18 +705,11 @@ static inline NSString *BHTIconNameForKey(NSString *key) {
                 if (self.viewModel.username != nil) UIPasteboard.generalPasteboard.string = self.viewModel.username;
             }];
 
-            UIAction *fullname = [UIAction actionWithTitle:[[BHTBundle sharedBundle] localizedStringForKey:@"COPY_PROFILE_INFO_MENU_OPTION_3"]
-                                                     image:BHTVectorIcon(BHTIconNameForKey(@"fullname"), 16.0)
-                                                identifier:nil
-                                                   handler:^(__kindof UIAction * _Nonnull action) {
-                if (self.viewModel.fullName != nil) UIPasteboard.generalPasteboard.string = self.viewModel.fullName;
-            }];
-
-            UIAction *url = [UIAction actionWithTitle:[[BHTBundle sharedBundle] localizedStringForKey:@"COPY_PROFILE_INFO_MENU_OPTION_4"]
-                                                image:BHTVectorIcon(BHTIconNameForKey(@"url"), 16.0)
+            UIAction *bio = [UIAction actionWithTitle:[[BHTBundle sharedBundle] localizedStringForKey:@"COPY_PROFILE_INFO_MENU_OPTION_1"]
+                                                image:BHTVectorIcon(BHTIconNameForKey(@"bio"), 16.0)
                                            identifier:nil
                                               handler:^(__kindof UIAction * _Nonnull action) {
-                if (self.viewModel.url != nil) UIPasteboard.generalPasteboard.string = self.viewModel.url;
+                if (self.viewModel.bio != nil) UIPasteboard.generalPasteboard.string = self.viewModel.bio;
             }];
 
             UIAction *location = [UIAction actionWithTitle:[[BHTBundle sharedBundle] localizedStringForKey:@"COPY_PROFILE_INFO_MENU_OPTION_5"]
@@ -726,7 +719,14 @@ static inline NSString *BHTIconNameForKey(NSString *key) {
                 if (self.viewModel.location != nil) UIPasteboard.generalPasteboard.string = self.viewModel.location;
             }];
 
-            [copyButton setMenu:[UIMenu menuWithTitle:@"" children:@[bio, username, fullname, url, location]]];
+            UIAction *url = [UIAction actionWithTitle:[[BHTBundle sharedBundle] localizedStringForKey:@"COPY_PROFILE_INFO_MENU_OPTION_4"]
+                                                image:BHTVectorIcon(BHTIconNameForKey(@"url"), 16.0)
+                                           identifier:nil
+                                              handler:^(__kindof UIAction * _Nonnull action) {
+                if (self.viewModel.url != nil) UIPasteboard.generalPasteboard.string = self.viewModel.url;
+            }];
+
+            [copyButton setMenu:[UIMenu menuWithTitle:@"" children:@[fullname, username, bio, location, url]]];
         } else {
             [copyButton addTarget:self action:@selector(copyButtonHandler:) forControlEvents:UIControlEventTouchUpInside];
         }
@@ -762,20 +762,20 @@ static inline NSString *BHTIconNameForKey(NSString *key) {
         alert.popoverPresentationController.sourceView = self.view;
         alert.popoverPresentationController.sourceRect = sender.frame;
     }
-    UIAlertAction *bio = [UIAlertAction actionWithTitle:[[BHTBundle sharedBundle] localizedStringForKey:@"COPY_PROFILE_INFO_MENU_OPTION_1"] style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-        if (self.viewModel.bio != nil) UIPasteboard.generalPasteboard.string = self.viewModel.bio;
+    UIAlertAction *fullname = [UIAlertAction actionWithTitle:[[BHTBundle sharedBundle] localizedStringForKey:@"COPY_PROFILE_INFO_MENU_OPTION_3"] style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        if (self.viewModel.fullName != nil) UIPasteboard.generalPasteboard.string = self.viewModel.fullName;
     }];
     UIAlertAction *username = [UIAlertAction actionWithTitle:[[BHTBundle sharedBundle] localizedStringForKey:@"COPY_PROFILE_INFO_MENU_OPTION_2"] style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
         if (self.viewModel.username != nil) UIPasteboard.generalPasteboard.string = self.viewModel.username;
     }];
-    UIAlertAction *fullname = [UIAlertAction actionWithTitle:[[BHTBundle sharedBundle] localizedStringForKey:@"COPY_PROFILE_INFO_MENU_OPTION_3"] style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-        if (self.viewModel.fullName != nil) UIPasteboard.generalPasteboard.string = self.viewModel.fullName;
-    }];
-    UIAlertAction *url = [UIAlertAction actionWithTitle:[[BHTBundle sharedBundle] localizedStringForKey:@"COPY_PROFILE_INFO_MENU_OPTION_4"] style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-        if (self.viewModel.url != nil) UIPasteboard.generalPasteboard.string = self.viewModel.url;
+    UIAlertAction *bio = [UIAlertAction actionWithTitle:[[BHTBundle sharedBundle] localizedStringForKey:@"COPY_PROFILE_INFO_MENU_OPTION_1"] style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        if (self.viewModel.bio != nil) UIPasteboard.generalPasteboard.string = self.viewModel.bio;
     }];
     UIAlertAction *location = [UIAlertAction actionWithTitle:[[BHTBundle sharedBundle] localizedStringForKey:@"COPY_PROFILE_INFO_MENU_OPTION_5"] style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
         if (self.viewModel.location != nil) UIPasteboard.generalPasteboard.string = self.viewModel.location;
+    }];
+    UIAlertAction *url = [UIAlertAction actionWithTitle:[[BHTBundle sharedBundle] localizedStringForKey:@"COPY_PROFILE_INFO_MENU_OPTION_4"] style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        if (self.viewModel.url != nil) UIPasteboard.generalPasteboard.string = self.viewModel.url;
     }];
 
     if (@available(iOS 13.0, *)) {
@@ -786,11 +786,11 @@ static inline NSString *BHTIconNameForKey(NSString *key) {
         [location setValue:BHTVectorIcon(BHTIconNameForKey(@"location"), 16.0) forKey:@"image"];
     }
 
-    [alert addAction:bio];
-    [alert addAction:username];
     [alert addAction:fullname];
-    [alert addAction:url];
+    [alert addAction:username];
+    [alert addAction:bio];
     [alert addAction:location];
+    [alert addAction:url];
     [alert addAction:[UIAlertAction actionWithTitle:[[BHTBundle sharedBundle] localizedStringForKey:@"CANCEL_BUTTON_TITLE"] style:UIAlertActionStyleCancel handler:nil]];
     [self presentViewController:alert animated:true completion:nil];
 }
@@ -803,32 +803,32 @@ static inline NSString *BHTIconNameForKey(NSString *key) {
         if (copyButton) {
             [copyButton setImage:BHTVectorIcon(BHTIconNameForKey(@"button"), 18.0) forState:UIControlStateNormal];
             if (@available(iOS 14.0, *)) {
-                UIAction *bio = [UIAction actionWithTitle:[[BHTBundle sharedBundle] localizedStringForKey:@"COPY_PROFILE_INFO_MENU_OPTION_1"]
-                                                    image:BHTVectorIcon(BHTIconNameForKey(@"bio"), 16.0)
-                                               identifier:nil handler:^(__kindof UIAction * _Nonnull action) {
-                    if (self.viewModel.bio != nil) UIPasteboard.generalPasteboard.string = self.viewModel.bio;
+                UIAction *fullname = [UIAction actionWithTitle:[[BHTBundle sharedBundle] localizedStringForKey:@"COPY_PROFILE_INFO_MENU_OPTION_3"]
+                                                         image:BHTVectorIcon(BHTIconNameForKey(@"fullname"), 16.0)
+                                                    identifier:nil handler:^(__kindof UIAction * _Nonnull action) {
+                    if (self.viewModel.fullName != nil) UIPasteboard.generalPasteboard.string = self.viewModel.fullName;
                 }];
                 UIAction *username = [UIAction actionWithTitle:[[BHTBundle sharedBundle] localizedStringForKey:@"COPY_PROFILE_INFO_MENU_OPTION_2"]
                                                          image:BHTVectorIcon(BHTIconNameForKey(@"username"), 16.0)
                                                     identifier:nil handler:^(__kindof UIAction * _Nonnull action) {
                     if (self.viewModel.username != nil) UIPasteboard.generalPasteboard.string = self.viewModel.username;
                 }];
-                UIAction *fullname = [UIAction actionWithTitle:[[BHTBundle sharedBundle] localizedStringForKey:@"COPY_PROFILE_INFO_MENU_OPTION_3"]
-                                                         image:BHTVectorIcon(BHTIconNameForKey(@"fullname"), 16.0)
-                                                    identifier:nil handler:^(__kindof UIAction * _Nonnull action) {
-                    if (self.viewModel.fullName != nil) UIPasteboard.generalPasteboard.string = self.viewModel.fullName;
-                }];
-                UIAction *url = [UIAction actionWithTitle:[[BHTBundle sharedBundle] localizedStringForKey:@"COPY_PROFILE_INFO_MENU_OPTION_4"]
-                                                      image:BHTVectorIcon(BHTIconNameForKey(@"url"), 16.0)
-                                                 identifier:nil handler:^(__kindof UIAction * _Nonnull action) {
-                    if (self.viewModel.url != nil) UIPasteboard.generalPasteboard.string = self.viewModel.url;
+                UIAction *bio = [UIAction actionWithTitle:[[BHTBundle sharedBundle] localizedStringForKey:@"COPY_PROFILE_INFO_MENU_OPTION_1"]
+                                                    image:BHTVectorIcon(BHTIconNameForKey(@"bio"), 16.0)
+                                               identifier:nil handler:^(__kindof UIAction * _Nonnull action) {
+                    if (self.viewModel.bio != nil) UIPasteboard.generalPasteboard.string = self.viewModel.bio;
                 }];
                 UIAction *location = [UIAction actionWithTitle:[[BHTBundle sharedBundle] localizedStringForKey:@"COPY_PROFILE_INFO_MENU_OPTION_5"]
                                                          image:BHTVectorIcon(BHTIconNameForKey(@"location"), 16.0)
                                                     identifier:nil handler:^(__kindof UIAction * _Nonnull action) {
                     if (self.viewModel.location != nil) UIPasteboard.generalPasteboard.string = self.viewModel.location;
                 }];
-                [copyButton setMenu:[UIMenu menuWithTitle:@"" children:@[bio, username, fullname, url, location]]];
+                UIAction *url = [UIAction actionWithTitle:[[BHTBundle sharedBundle] localizedStringForKey:@"COPY_PROFILE_INFO_MENU_OPTION_4"]
+                                                      image:BHTVectorIcon(BHTIconNameForKey(@"url"), 16.0)
+                                                 identifier:nil handler:^(__kindof UIAction * _Nonnull action) {
+                    if (self.viewModel.url != nil) UIPasteboard.generalPasteboard.string = self.viewModel.url;
+                }];
+                [copyButton setMenu:[UIMenu menuWithTitle:@"" children:@[fullname, username, bio, location, url]]];
             }
         }
     }
